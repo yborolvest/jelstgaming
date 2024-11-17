@@ -98,3 +98,6 @@ body {
 .btn-slots {
     background: url('/assets/img/slots.jpg') no-repeat center;
 }
+.btn-cases {
+    background: url('/assets/img/cases.webp') no-repeat center;
+}

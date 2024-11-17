@@ -63,3 +63,8 @@
         cursor: pointer;
         border-radius: 50%;
     }
+
+    h2 {
+        color: white;
+        text-align: center;
+    }

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jelst gaming</title>
+    <link rel="icon" href="assets/img/favicon.png" type="image/png">
+    <link rel="stylesheet" href="../assets/jelst.css">
+    <link rel="stylesheet" href="assets/cases.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="/assets/jelst-crosssite.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+</head>
+<body><div class="back-to-jelst">
+	<a href="/">Terug naar home</a>
+</div>
+<div class="jelst-audio">
+	<audio id="background-audio" src="assets/audio/sunshine_casino.mp3" autoplay loop></audio>
+	<input id="volume-slider" type="range" min="0" max="100" value="15" step="1">
+	<script>
+		const audioTracks = [
+			'../assets/audio/sunshine_casino.mp3',
+			'../assets/audio/l_casino.mp3',
+			'../assets/audio/world_bowser.mp3'
+		];
+		const randomIndex = Math.floor(Math.random() * audioTracks.length);
+		const audioElement = document.getElementById('background-audio');
+		audioElement.src = audioTracks[randomIndex];
+
+		const volumeSlider = document.getElementById('volume-slider');
+		volumeSlider.addEventListener('input', function() {
+			audioElement.volume = volumeSlider.value / 100;
+		});
+
+		audioElement.volume = volumeSlider.value / 100;
+
+	</script>
+	
+	</audio>
+</div>
+   
+    <div class="container">
+        <div class="case-picker">
+            <form class="case-picker-form">
+                <input type="radio" name="caseSelect" id="jelstcase" class="csbox-checkbox" value="jelstcase">
+                <label for="jelstcase" class="csbox-checkbox-label"><img src="https://pub-5f12f7508ff04ae5925853dee0438460.r2.dev/data/csgo/resource/flash/econ/weapon_cases/crate_community_34_png.png">Jelst Case<br>(20 credits)</label>
+                <input type="radio" name="caseSelect" id="chromacase" class="csbox-checkbox" value="chroma">
+                <label for="chromacase" class="csbox-checkbox-label"><img src="https://steamcommunity-a.akamaihd.net/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXU5A1PIYQNqhpOSV-fRPasw8rsUFJ5KBFZv668FFEuh_KQJTtEuI63xIXbxqOtauyClTMEsJV1jruS89T3iQKx_BBqa2j3JpjVLFH1xpp0EQ">Chroma Case <br>(40 credits)</label>
+            </form>
+        </div>
+        <div class="case-opener">
+            <div class="case-spinner">
+                <div class="case-spinner-inner">
+
+                </div>
+            </div>                                                                                                               
+        </div>
+        <div class="case-controls">
+            <a id="openCaseButton" class="jelst-btn open-case">Open case</a>
+        </div>
+        <div class="case-history">
+            <h2>You unboxed:</h2>
+            <div class="last-case">
+
+            </div>
+            <h2 style="margin-top: 16px;">Case history</h2>
+            
+            <ul class="case-history-list">
+
+            </ul>
+        </div>
+    </div>
+    <script src="assets/cases.js"></script>
+</body>

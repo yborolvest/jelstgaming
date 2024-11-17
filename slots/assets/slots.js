@@ -7,96 +7,72 @@ const reelSymbols = [
     { src: 'assets/img/jeroenwatermeloen.png', rarity: 10, payout: 10 },
 ];
 
-const reelCount = 3;
-const symbolSize = 100;
-const credits = 100;
-let currentCredits = credits;
-const rows = 3; // Number of visible rows
+let credits = 100;
+let currentWin = 0;
 
-function drawReel(x, y, symbol) {
-    const img = new Image();
-    img.src = symbol.src;
-    img.onload = () => {
-        ctx.drawImage(img, x, y, symbolSize, symbolSize);
-    };
-}
+const reelCount = 6;
+const reelHeight = canvas.height;
+const reelWidth = canvas.width / reelCount;
+const symbolHeight = 100;
+const spinSpeed = 10;
 
-function getRandomSymbol() {
-    const totalRarity = reelSymbols.reduce((sum, symbol) => sum + symbol.rarity, 0);
-    let random = Math.floor(Math.random() * totalRarity);
-    for (const symbol of reelSymbols) {
-        if (random < symbol.rarity) {
-            return symbol;
-        }
-        random -= symbol.rarity;
-    }
-}
+let reels = [];
+let spinning = false;
 
-function spinReels() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    const results = [];
+function initializeReels() {
     for (let i = 0; i < reelCount; i++) {
-        const columnResults = [];
-        for (let j = 0; j < rows; j++) {
-            const symbol = getRandomSymbol();
-            drawReel(i * symbolSize, j * symbolSize, symbol);
-            columnResults.push(symbol);
+        let reel = {
+            symbols: [],
+            position: 0,
+            speed: Math.random() * spinSpeed + spinSpeed
+        };
+        for (let j = 0; j < reelHeight / symbolHeight; j++) {
+            let symbol = reelSymbols[Math.floor(Math.random() * reelSymbols.length)];
+            reel.symbols.push(symbol);
         }
-        results.push(columnResults);
+        reels.push(reel);
     }
-    return results;
 }
 
-function checkWin(results) {
-    const firstSymbol = results[0][0];
-    if (results.every(column => column.every(symbol => symbol.src === firstSymbol.src))) {
-        return firstSymbol.payout;
+function drawReels() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    for (let i = 0; i < reelCount; i++) {
+        let reel = reels[i];
+        for (let j = 0; j < reel.symbols.length; j++) {
+            let symbol = reel.symbols[j];
+            let img = new Image();
+            img.src = symbol.src;
+            let y = (reel.position + j * symbolHeight) % reelHeight;
+            ctx.drawImage(img, i * reelWidth, y, reelWidth, symbolHeight);
+        }
     }
-    return 0;
 }
 
-function updateCredits(payout) {
-    if (payout > 0) {
-        currentCredits += payout;
-    } else {
-        currentCredits -= 1;
+function updateReels() {
+    for (let i = 0; i < reelCount; i++) {
+        reels[i].position += reels[i].speed;
+        if (reels[i].position >= reelHeight) {
+            reels[i].position = 0;
+            reels[i].symbols.shift();
+            let symbol = reelSymbols[Math.floor(Math.random() * reelSymbols.length)];
+            reels[i].symbols.push(symbol);
+        }
     }
-    document.getElementById('credits').innerText = `Credits: ${currentCredits}`;
+}
+
+function animate() {
+    if (spinning) {
+        drawReels();
+        updateReels();
+        requestAnimationFrame(animate);
+    }
 }
 
 document.getElementById('spinButton').addEventListener('click', () => {
-    if (currentCredits > 0) {
-        animateReels();
-    } else {
-        alert('Out of credits!');
+    if (!spinning) {
+        spinning = true;
+        animate();
     }
 });
 
-// Initial draw
-document.getElementById('credits').innerText = `Credits: ${currentCredits}`;
-
-function animateReels() {
-    const spinDuration = 2000; // Duration of the spin in milliseconds
-    const startTime = Date.now();
-
-    function animate() {
-        const elapsedTime = Date.now() - startTime;
-        if (elapsedTime < spinDuration) {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            for (let i = 0; i < reelCount; i++) {
-                for (let j = 0; j < rows + 1; j++) {
-                    const symbol = getRandomSymbol();
-                    const y = (elapsedTime / spinDuration) * canvas.height - symbolSize;
-                    drawReel(i * symbolSize, (j * symbolSize + y) % canvas.height, symbol);
-                }
-            }
-            requestAnimationFrame(animate);
-        } else {
-            const results = spinReels();
-            const payout = checkWin(results);
-            updateCredits(payout);
-        }
-    }
-
-    animate();
-}
+initializeReels();
