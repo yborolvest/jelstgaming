@@ -1,29 +1,71 @@
+/* import */
+@import url('jelstanimations.css');
+
 * {
     font-family: 'Noto Sans', sans-serif;
 }
 
-
-@keyframes textAnimation {
-    0% {
-        opacity: 0;
-        transform: translateY(-20px);
-    }
-    50%, 70% {
-        opacity: 1;
-        transform: translateY(0);
-    }
-    100% {
-        opacity: 0;
-        transform: translateY(20px);
-    }
+body {
+    background-color: #3d3e4b;
+    margin: 0;
+    padding: 0;
 }
 
 .text-sequence {
-    animation: textAnimation 3s ease-in-out forwards;
-    position: absolute;
-    top: 50%;
+    animation: textAnimation 5s ease-in-out forwards;
+    position: relative;
     margin: 0 auto;
     display: block;
     font-size: 3em;
     font-weight: 700;
+    color: #fff;
+}
+
+.intro-sequence-container {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: moveOutToTop 1s ease-in-out forwards 5s;
+    background-color: #14151f;
+    
+}
+
+.jelst-btn {
+    display: inline-block;
+    padding: 0.5em 1em;
+    margin: 0.5em;
+    border: 2px solid #fff;
+    border-radius: 0.2em;
+    color: #fff;
+    font-size: 1em;
+    font-weight: 700;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.3s ease-in-out;
+}
+.jelst-btn:hover {
+    background-color: #fff;
+    color: #14151f;
+}
+
+.game-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-flow: column;
+    height: 100vh;
+    background-color: #3d3e4b;
+    color: #fff;
+}
+
+.game-container-inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-flow: column;
+    padding: 1em;
+    border-radius: 0.2em;
 }

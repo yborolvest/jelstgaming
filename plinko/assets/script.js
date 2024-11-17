@@ -39,6 +39,16 @@ let balls = 10;
 const ballsEl = document.getElementById("balls");
 // Click noise synth when clicking drop
 const clickSynth = new Tone.NoiseSynth({ volume: -26 }).toDestination();
+// resume audio context on drop button
+document.getElementById("drop-button").addEventListener("click", () => {
+    Tone.start();
+    // play #background-audio if not playing
+    const audio = document.getElementById("background-audio");
+    if (audio.paused) {
+        audio.play();
+    }
+    
+});
 // Drop button
 const dropButton = document.getElementById("drop-button");
 const autoDropCheckbox = document.getElementById("checkbox");
@@ -53,7 +63,7 @@ dropButton.addEventListener("click", () => {
     else if (autoDropEnabled && !autoDroppingInterval) {
         dropButton.innerHTML = "Stop";
         dropABall();
-        autoDroppingInterval = setInterval(dropABall, 600);
+        autoDroppingInterval = setInterval(dropABall, 300);
     }
     else if (!autoDropEnabled) {
         dropABall();
