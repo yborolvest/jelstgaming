@@ -1,0 +1,29 @@
+* {
+    font-family: 'Noto Sans', sans-serif;
+}
+
+
+@keyframes textAnimation {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    50%, 70% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+}
+
+.text-sequence {
+    animation: textAnimation 3s ease-in-out forwards;
+    position: absolute;
+    top: 50%;
+    margin: 0 auto;
+    display: block;
+    font-size: 3em;
+    font-weight: 700;
+}
