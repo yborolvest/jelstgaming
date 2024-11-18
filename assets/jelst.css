@@ -115,8 +115,7 @@ body {
 
 .game-container-inner {
     display: grid;
-    width: 80vw;
-    max-width: 1200px;
+    width: 100%;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     grid-template-rows: auto;
     grid-gap: 2em;
