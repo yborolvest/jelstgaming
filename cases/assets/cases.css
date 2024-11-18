@@ -183,7 +183,7 @@ body {
     position: fixed;
     bottom: 104px;
     left: 0;
-    height: 64px;
+    height: 24px;
     transition: 0.3s all ease-in-out;
 }
 .ohnepixel-live-reaction:hover {
