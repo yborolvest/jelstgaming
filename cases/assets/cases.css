@@ -61,7 +61,7 @@ body {
     border: 1px solid coral;
     border-left: none;
     border-right: none;
-    overflow-x: scroll;
+    overflow-x: hidden;
     box-shadow: inset coral 0px 0px 16px 0;
 }
 

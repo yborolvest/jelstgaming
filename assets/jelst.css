@@ -6,13 +6,31 @@
 }
 
 body {
-    background-color: #3d3e4b;
+    background-color: #e4e4e4;
     margin: 0;
     padding: 0;
 }
 
+.cursor {
+    width: 40px;
+    height: 40px;
+    background: url('/assets/img/wiicursor.png') no-repeat;
+    background-size: contain;
+    position: absolute;
+    pointer-events: none;
+    z-index: 1000;
+    filter: drop-shadow(4px 4px 3px rgba(0, 0, 0, 0.5));
+    transition: 0.3s ease-in-out;
+    transition-property: width, height;
+    overflow: hidden;
+}
+.cursor.expand {
+    width: 30px;
+    height: 30px;
+}
+
 .text-sequence {
-    animation: textAnimation 3s ease-in-out forwards;
+   /* animation: textAnimation 3s ease-in-out forwards; */
     position: relative;
     margin: 0 auto;
     display: block;
@@ -20,18 +38,46 @@ body {
     font-weight: 700;
     color: #fff;
 }
+.circleAround {
+    position: relative;
+    display: inline-block;
+    margin: 0 1ch;
+    font-weight: 700;
+    color: #fff;
+    animation: circleAround 3s ease-in-out forwards;
+}
+.circleAround::after {
+    content: '';
+    position: absolute;
+    margin-left: -1.95ch;
+    margin-top: 0.25ch;
+    display: inline-block;
+    border-radius: 1em;
+    border: 1px solid #fff;
+    width: 2.5ch;
+    height: 2.5ch;
+}
 
 .intro-sequence-container {
     position: fixed;
     width: 100vw;
     height: 100vh;
     display: flex;
+    flex-flow: column nowrap;
     align-items: center;
     justify-content: center;
-    animation: moveOutToTop 1s ease-in-out forwards 3s;
-    background-color: #14151f;
+    text-align: center;
+    line-height: 1.8;
+    /* animation: moveOutToTop 1s ease-in-out forwards 3s; */
+    background-color: #000000;
     z-index: 99;
-    
+    color: white;
+    transition: all 1s ease-in-out;
+    opacity: 1;
+}
+.intro-sequence-container a {
+    color: #fff;
+    text-decoration: none;
 }
 
 .jelst-btn {
@@ -54,44 +100,53 @@ body {
 }
 
 .game-container {
+    margin: 0 auto;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-flow: column;
-    height: 100vh;
-    background-color: #3d3e4b;
+    min-height: 50vh;
+    background-color: #e4e4e4;
     color: #fff;
-    width: 100vw;
+    width: 80vw;
+    max-width: 1080px;
     overflow-x: hidden;
 }
 
 .game-container-inner {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-flow: column;
+    display: grid;
+    width: 80vw;
+    max-width: 1200px;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-rows: auto;
+    grid-gap: 2em;
     padding: 1em;
-    border-radius: 0.2em;
+    justify-items: center;
+    
 }
 
 .jelst-home-btn {
-    width: 100vw;
+    width: 300px;
+    min-height: 34px;
     vertical-align: center;
     text-align: center;
-    padding: 3em 0;
+    padding: 2em 0;
     transition: all 0.3s ease-in-out;
     text-decoration: none;
     background-size: cover;
     color: #fff;
     font-size: 2rem;
     font-weight: 700;
-    filter: saturate(0.1);
+    border-radius: 1rem;
     box-shadow: inset 0 0 10px 0px rgba(0, 0, 0, 0.5);
+    border: 2px solid #7a7a7a;
 }
+
 .jelst-home-btn:hover {
-    padding: 6em 0;
-    filter: saturate(1);
+    transform: scale(1.05);
+    border: 2px solid turquoise;
 }
+
 .btn-plinko {
     background: url('/assets/img/plinko.jpg') no-repeat center;  
 }
@@ -100,4 +155,48 @@ body {
 }
 .btn-cases {
     background: url('/assets/img/cases.webp') no-repeat center;
+}
+.btn-cs {
+    background: url('/assets/img/static.gif') no-repeat center;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100vw;
+    height: 400px;
+    background-repeat: repeat-x;
+    background-size: 200px;
+    background-position: bottom;
+    background-image: url('/assets/img/MidpartWii.svg');
+}
+.footer-current-time {
+    font-family: "Orbitron", sans-serif;
+    font-weight: 500;
+    font-size: 2rem;
+    position: absolute;
+    bottom: 120px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #7a7a7a;
+}
+
+@media screen and (min-width: 768px) {
+    footer::after, footer::before {
+        position: absolute;
+        content: '';
+        display: block;
+        width: 380px;
+        height: 400px;
+        background-image: url('/assets/img/EndpartWii.svg');
+        background-repeat: no-repeat;
+        background-size: 386px;
+        background-position: bottom;
+    }
+    footer::before {
+        transform: scaleX(-1);
+        bottom: 0;
+        right: 0;
+    }
+    
 }
