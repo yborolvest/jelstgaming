@@ -1,3 +1,11 @@
+body {
+    background-color: #14151f;
+    color: white;
+    font-size: 16px;
+    line-height: 1.5;
+    margin: 0;
+    padding: 0;
+}
 .case-picker-form {
     display: flex;
     flex-flow: row wrap;
@@ -169,4 +177,16 @@
 
 .earnings {
     color: greenyellow;
+}
+
+.ohnepixel-live-reaction {
+    position: fixed;
+    bottom: 104px;
+    left: 0;
+    height: 64px;
+    transition: 0.3s all ease-in-out;
+}
+.ohnepixel-live-reaction:hover {
+
+    height: 300px;
 }
