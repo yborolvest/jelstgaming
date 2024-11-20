@@ -102,6 +102,33 @@ app.post('/api/users/:uuid', (req, res) => {
     });
 });
 
+app.get('/api/users/:uuid', (req, res) => {
+    const { uuid } = req.params;
+    db.query('SELECT name FROM users WHERE uuid = ?', [uuid], (err, results) => {
+        if (err) {
+            console.error('Error querying database', err);
+            res.status(500).send('Error querying database');
+            return;
+        }
+        if (results.length === 0) {
+            res.status(404).send('User not found');
+            return;
+        }
+        res.json({name: results[0].name});
+    });
+});
+
+app.get('/api/leaderboard', (req, res) => {
+    db.query('SELECT name, credits FROM users WHERE name IS NOT NULL ORDER BY credits DESC LIMIT 10', (err, results) => {
+        if (err) {
+            console.error('Error querying database', err);
+            res.status(500).send('Error querying database');
+            return;
+        }
+        res.json(results);
+    });
+});
+
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });

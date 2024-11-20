@@ -1,4 +1,5 @@
 var uuid;
+const site = 'http://127.0.0.1:3000'
 
 async function initUser(){
     let uuidStorage = localStorage.getItem('uuid');
@@ -24,7 +25,7 @@ async function initUser(){
 
 async function createUser(uuid){
     try{
-        const response = await fetch('/api/users', {
+        const response = await fetch(site+'/api/users', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -43,7 +44,7 @@ async function createUser(uuid){
 
 async function setNickname(name){
     try{
-        const response = await fetch(`/api/users/${uuid}`, {
+        const response = await fetch(site+`/api/users/${uuid}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -54,6 +55,37 @@ async function setNickname(name){
         if(!response.ok){
             throw new Error('Failed to update name');
         }
+    }
+    catch (err){
+        console.error(err);
+    }
+}
+
+async function GetNickname(){
+    try{
+        const response = await fetch(site+`/api/users/${uuid}`);
+
+        if(!response.ok){
+            throw new Error('Failed to get user');
+        }
+
+        const data = await response.json();
+        return data.name;
+    }
+    catch (err){
+        console.error(err);
+    }
+}
+
+async function getTopPlayers(){
+    try{
+        const response = await fetch(site+'/api/leaderboard');
+
+        if(!response.ok){
+            throw new Error('Failed to get leaderboard');
+        }
+
+        return await response.json();
     }
     catch (err){
         console.error(err);

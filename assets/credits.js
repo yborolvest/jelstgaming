@@ -1,4 +1,5 @@
 let credits = 0;
+const site = 'http://127.0.0.1:3000';
 
 function GetCredits(){
     ReadCredits();
@@ -7,7 +8,7 @@ function GetCredits(){
 
 async function ReadCredits(){
     try {
-        const response = await fetch('http://127.0.0.1:3000/api/credits/' + uuid);
+        const response = await fetch(site+'/api/credits/' + uuid);
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }
@@ -22,7 +23,7 @@ async function UpdateCredits(amount){
     await ReadCredits();
     credits += amount;
     try {
-        const response = await fetch('http://127.0.0.1:3000/api/credits/' + uuid, {
+        const response = await fetch(site+'/api/credits/' + uuid, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
