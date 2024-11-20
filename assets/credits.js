@@ -1,14 +1,13 @@
 let credits = 0;
 
-function Credits(){
-    UpdateCredits().then(r => {
-        return credits;
-    });
+function GetCredits(){
+    ReadCredits();
+    return credits;
 }
 
-async function UpdateCredits(){
+async function ReadCredits(){
     try {
-        const response = await fetch('/api/credits/' + uuid);
+        const response = await fetch('http://127.0.0.1:3000/api/credits/' + uuid);
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }
@@ -19,20 +18,24 @@ async function UpdateCredits(){
     }
 }
 
-async function SetCredits(amount){
+async function UpdateCredits(amount){
+    await ReadCredits();
+    credits += amount;
     try {
-        const response = await fetch('/api/credits/' + uuid, {
+        const response = await fetch('http://127.0.0.1:3000/api/credits/' + uuid, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({amount})
+            body: JSON.stringify({credits})
         });
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }
-        credits += amount;
+
     } catch (error) {
         console.error('Failed to set credits:', error);
     }
 }
+
+ReadCredits();

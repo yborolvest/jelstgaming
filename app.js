@@ -3,7 +3,7 @@ require('dotenv').config();
 const express = require('express');
 const path = require('path');
 const mysql = require('mysql2');
-
+const cors = require('cors');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -25,6 +25,7 @@ db.connect(err =>{
 });
 
 // Middlewares
+app.use(cors());
 app.use(express.static(__dirname))
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -67,7 +68,7 @@ app.post('/api/credits/:uuid', (req, res) => {
     const { uuid } = req.params;
     const { credits } = req.body;
 
-    if (!credits) {
+    if (credits === undefined || credits === null || credits < 0) {
         res.status(400).send('Missing credits');
         return
     }

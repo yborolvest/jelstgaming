@@ -35,7 +35,6 @@ const notes = [
     "C5",
     "C#5"
 ].map((note) => new Note(note));
-let balls = 10;
 const ballsEl = document.getElementById("balls");
 // Click noise synth when clicking drop
 const clickSynth = new Tone.NoiseSynth({ volume: -26 }).toDestination();
@@ -85,9 +84,11 @@ autoDropCheckbox.addEventListener("input", (e) => {
 // Drop a ball
 const BALL_RAD = 7;
 function dropABall() {
-    if (balls > 0) {
-        balls -= 1;
+    if (GetCredits() > 0) {
+        UpdateCredits(-1);
     }
+    else {return;}
+
     const dropLeft = width / 2 - GAP;
     const dropRight = width / 2 + GAP;
     const dropWidth = dropRight - dropLeft;
@@ -180,7 +181,7 @@ Matter.Events.on(engine, "collisionStart", (event) => {
             if (index >= 0 && index < 17) {
                 // Register ball
                 const ballsWon = Math.floor(multipliers[index]);
-                balls += ballsWon;
+                UpdateCredits(ballsWon);
                 // Ball hit note at bottom
                 const el = document.getElementById(`note-${index}`);
                 if (el.dataset.pressed !== "true") {
@@ -234,7 +235,7 @@ function run() {
     });
     Engine.update(engine, 1000 / 60);
     // Update ball count
-    ballsEl.innerHTML = balls;
+    ballsEl.innerHTML = GetCredits();
     requestAnimationFrame(run);
 }
 run();
