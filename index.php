@@ -1,25 +1,19 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <?php require_once('templates/head.php'); ?>
     <title>jelst gaming</title>
-    <link rel="icon" href="./assets/img/favicon.png" type="image/png">
-    <link rel="stylesheet" href="./assets/jelst.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <style>* {cursor: none} </style>
 </head>
 <body>
     <div class="intro-sequence-container">
-        <h2 class="">⚠ WARNING-HEALTH AND SAFETY</h1>
+        <h2 class="">⚠️ WARNING-HEALTH AND SAFETY</h1>
         <p>BEFORE PLAYING, READ YOUR OPERATIONS<br>MANUAL FOR IMPORTANT INFORMATION<br>ABOUT YOUR HEALTH AND SAFETY.</p>
         <p>Also online at <br> <a href="/healthsafety/" target="_blank">www.jeroenelst.nl/healthsafety/</a></p>
         <a onclick="removeIntro()">Press <span class="circleAround">A</span> to continue</a>
         <script>
-            const clickaudio = new Audio('./assets/audio/WSD-SELECT.mp3');
-            const hoveraudio = new Audio('./assets/audio/Sample_0003.mp3');
+            const clickaudio = new Audio('/assets/audio/WSD-SELECT.mp3');
+            const hoveraudio = new Audio('/assets/audio/Sample_0003.mp3');
             hoveraudio.volume = 0.5;
             clickaudio.volume = 0.3;
             document.addEventListener('keydown', (e) => {
@@ -28,7 +22,7 @@
                 }
             });
             function removeIntro() {
-                const bgaudio = new Audio('./assets/audio/wii-ambient.mp3');
+                const bgaudio = new Audio('/assets/audio/wii-ambient.mp3');
                 // bg audio volume
                 bgaudio.volume = 0.1;
                 bgaudio.play();
@@ -48,9 +42,12 @@
     </div>
     <div class="game-container">        
         <div class="game-container-inner">
-            <a class="jelst-home-btn btn-plinko" href="./plinko/">Plinko</a>
-            <a class="jelst-home-btn btn-slots" href="./slots/">Slots</a>
-            <a class="jelst-home-btn btn-cases" href="./cases/">CS Cases</a>
+            <a class="jelst-home-btn btn-plinko" href="/plinko/">Plinko</a>
+            <a class="jelst-home-btn btn-slots" href="/slots/">Slots</a>
+            <a class="jelst-home-btn btn-cases" href="/cases/">CS Cases</a>
+            <a class="jelst-home-btn btn-cs"></a>
+            <a class="jelst-home-btn btn-cs"></a>
+            <a class="jelst-home-btn btn-cs"></a>
             <a class="jelst-home-btn btn-cs"></a>
             <a class="jelst-home-btn btn-cs"></a>
             <a class="jelst-home-btn btn-cs"></a>
@@ -83,5 +80,6 @@
             footerTime.innerText = `${hours}:${minutes < 10 ? '0' + minutes : minutes}`;
         }, 1000);
     </script>
+    <?php require_once('templates/footer.php'); ?>
 </body>
 </html>

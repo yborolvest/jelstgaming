@@ -1,44 +1,18 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>jelst gaming</title>
-    <link rel="icon" href="../assets/img/favicon.png" type="image/png">
-    <link rel="stylesheet" href="../assets/jelst.css">
+
+    <?php 
+
+        include_once($_SERVER['DOCUMENT_ROOT'] .'/templates/head.php'); 
+        
+    ?>
+
+    <title>Jelst Cases</title>
     <link rel="stylesheet" href="./assets/cases.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="../assets/jelst-crosssite.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 </head>
-<body><div class="back-to-jelst">
-	<a href="../">Terug naar home</a>
-</div>
-<div class="jelst-audio">
-	<audio id="background-audio" src="assets/audio/sunshine_casino.mp3" autoplay loop></audio>
-	<input id="volume-slider" type="range" min="0" max="100" value="15" step="1">
-	<script>
-		const audioTracks = [
-			'../assets/audio/sunshine_casino.mp3',
-			'../assets/audio/l_casino.mp3',
-			'../assets/audio/world_bowser.mp3'
-		];
-		const randomIndex = Math.floor(Math.random() * audioTracks.length);
-		const audioElement = document.getElementById('background-audio');
-		audioElement.src = audioTracks[randomIndex];
-
-		const volumeSlider = document.getElementById('volume-slider');
-		volumeSlider.addEventListener('input', function() {
-			audioElement.volume = volumeSlider.value / 100;
-		});
-
-		audioElement.volume = volumeSlider.value / 100;
-
-	</script>
-	
-	</audio>
-</div>
+<body>
+    <?php require_once($_SERVER['DOCUMENT_ROOT'] . '/templates/jelst-nav.php'); ?>
    
     <div class="container">
         <div class="case-picker">
@@ -73,4 +47,5 @@
     </div>
     <img class="ohnepixel-live-reaction" src="https://media1.tenor.com/m/fcWCX1eB0NMAAAAd/ohnepixel-ohne.gif"> 
     <script src="./assets/cases.js"></script>
+    <?php include_once($_SERVER['DOCUMENT_ROOT'] . '/templates/footer.php'); ?>
 </body>

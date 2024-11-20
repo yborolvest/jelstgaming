@@ -111,6 +111,7 @@ body {
     width: 80vw;
     max-width: 1080px;
     overflow-x: hidden;
+    padding-top: 64px;
 }
 
 .game-container-inner {

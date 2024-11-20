@@ -50,7 +50,7 @@ const cases = {
             {
                 "name": "2 Kg Huzarensalade",
                 "rarity": "Mil-Spec",
-                "img": "https://cdn.discordapp.com/attachments/1161092679292162099/1307828007607599228/40012762.png?ex=673bb93f&is=673a67bf&hm=ad08337df09f5e3d73612da3697226313b6fbb3fdd5b3e67ff17c88a542eb4bc&",
+                "img": "https://jumbo.com/dam-images/fit-in/720x720/Products/29092023_1695994870270_1695994896148_8710948601192_5.png",
                 "worth": 10
             },
             {
