@@ -2,7 +2,7 @@
 <html lang="nl">
 <head>
     <?php require_once('templates/head.php'); ?>
-    <title>jelst gaming</title>
+    <title>Jelst Gaming</title>
     <style>* {cursor: none} </style>
 </head>
 <body>
@@ -35,16 +35,13 @@
             document.addEventListener('click', () => {
                 clickaudio.play();
             });
-
-
-
         </script>
     </div>
     <div class="game-container">        
         <div class="game-container-inner">
-            <a class="jelst-home-btn btn-plinko" href="/plinko/">Plinko</a>
-            <a class="jelst-home-btn btn-slots" href="/slots/">Slots</a>
-            <a class="jelst-home-btn btn-cases" href="/cases/">CS Cases</a>
+            <a class="jelst-home-btn btn-plinko" href="/plinko/">Jelst Plinko</a>
+            <a class="jelst-home-btn btn-slots" href="/slots/">Jelst Slots</a>
+            <a class="jelst-home-btn btn-cases" href="/cases/">CS:Jelst Cases</a>
             <a class="jelst-home-btn btn-cs"></a>
             <a class="jelst-home-btn btn-cs"></a>
             <a class="jelst-home-btn btn-cs"></a>
@@ -55,6 +52,8 @@
     </div>
     <footer>
         <div class="footer-current-time">00:00</div>
+        <div class="footer-username wii-menu-btn"><img src="/assets/img/person.svg"></div>
+        <div class="footer-credits wii-menu-btn"><img src="/assets/img/credit.svg"></div>
     </footer>
     <script>
         const cursor = document.createElement('div');

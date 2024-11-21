@@ -1,9 +1,10 @@
 html {
-  font-family: "Montserrat", sans-serif;
+  font-family: "Noto Sans", sans-serif;
 }
 
 body {
   background-color: #14151f;
+  background-image: none;
 }
 
 button {
@@ -215,4 +216,47 @@ button:active {
 
 .header .logo {
   height: 100px;
+}
+
+#BuySellBalls {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1em;
+  color: #fff;
+}
+#BuySellBalls p {
+  margin: 0;
+}
+#BuySellBalls .BuySellControl {
+  padding-top:1em;
+  display: flex;
+  flex-flow: row;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 2em;
+}
+
+.BuySellControl .buySellBtns {
+  height: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1em;
+}
+
+.BuySellControl .buySellBtns button {
+  color: #fff;
+  background-color: coral;
+  border: none;
+  border-radius: 1rem;
+  padding: .5em 1em;
+}
+
+#credits {
+  transition: all 0.1s ease-out;
+  position: relative;
+  display: inline-block;
 }

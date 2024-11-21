@@ -1,5 +1,9 @@
 "use strict";
 console.clear();
+// Set credits to 100
+let credits = 100;
+const creditsEl = document.getElementById("credits");
+creditsEl.innerHTML = credits;
 const width = 620;
 const height = 534;
 // Note class
@@ -13,7 +17,7 @@ class Note {
         return this.synth.triggerAttackRelease(this.note, "32n", Tone.context.currentTime);
     }
 }
-const multipliers = [50, 20, 7, 4, 3, 1, 1, 0, 0, 0, 1, 1, 3, 4, 7, 20, 50];
+const multipliers = [3, 8, 2, 1, 1, 0, 0, 0, -3, 0, 0, 0, 1, 1, 2, 5, 4];
 multipliers.forEach((m, i) => (document.getElementById(`note-${i}`).innerHTML = m));
 // Create notes
 const notes = [
@@ -35,7 +39,6 @@ const notes = [
     "C5",
     "C#5"
 ].map((note) => new Note(note));
-let balls = 10;
 const ballsEl = document.getElementById("balls");
 // Click noise synth when clicking drop
 const clickSynth = new Tone.NoiseSynth({ volume: -26 }).toDestination();
@@ -50,6 +53,7 @@ document.getElementById("drop-button").addEventListener("click", () => {
     
 });
 // Drop button
+let balls = 0;
 const dropButton = document.getElementById("drop-button");
 const autoDropCheckbox = document.getElementById("checkbox");
 let autoDropEnabled = false;
@@ -87,25 +91,26 @@ const BALL_RAD = 7;
 function dropABall() {
     if (balls > 0) {
         balls -= 1;
-    }
-    const dropLeft = width / 2 - GAP;
-    const dropRight = width / 2 + GAP;
-    const dropWidth = dropRight - dropLeft;
-    const x = Math.random() * dropWidth + dropLeft;
-    const y = -PEG_RAD;
-    const ball = Bodies.circle(x, y, BALL_RAD, {
-        label: "Ball",
-        restitution: 0.6,
-        render: {
-            sprite: {
-                texture: "jeroen.png",
-                xScale: 0.2,
-                yScale: 0.2
+        const dropLeft = width / 2 - GAP;
+        const dropRight = width / 2 + GAP;
+        const dropWidth = dropRight - dropLeft;
+        const x = Math.random() * dropWidth + dropLeft;
+        const y = -PEG_RAD;
+        const ball = Bodies.circle(x, y, BALL_RAD, {
+            label: "Ball",
+            restitution: 0.6,
+            render: {
+                sprite: {
+                    texture: "jeroen.png",
+                    xScale: 0.2,
+                    yScale: 0.2
+                }
             }
-        }
-    });
-    clickSynth.triggerAttackRelease("32n", Tone.context.currentTime);
-    Composite.add(engine.world, [ball]);
+        });
+        clickSynth.triggerAttackRelease("32n", Tone.context.currentTime);
+        Composite.add(engine.world, [ball]);
+    }
+    
 }
 // module aliases
 const Engine = Matter.Engine, Events = Matter.Events, Render = Matter.Render, Runner = Matter.Runner, Bodies = Matter.Bodies, Composite = Matter.Composite;
@@ -180,7 +185,8 @@ Matter.Events.on(engine, "collisionStart", (event) => {
             if (index >= 0 && index < 17) {
                 // Register ball
                 const ballsWon = Math.floor(multipliers[index]);
-                balls += ballsWon;
+                credits += ballsWon;
+                creditsEl.innerHTML = credits;
                 // Ball hit note at bottom
                 const el = document.getElementById(`note-${index}`);
                 if (el.dataset.pressed !== "true") {
@@ -233,8 +239,76 @@ function run() {
         ctx.fill();
     });
     Engine.update(engine, 1000 / 60);
+    
     // Update ball count
+    
+    if (balls < 0) {
+        balls = 0;
+    }
+    
     ballsEl.innerHTML = balls;
     requestAnimationFrame(run);
+
 }
 run();
+
+// buy balls function for buttons in div with ID BuyBalls
+Array.from(document.getElementsByClassName("btn-BuyBalls")).forEach((element) => {
+    element.addEventListener("click", buyBalls);
+});
+// buy balls function
+
+function buyBalls() {
+    if (credits > 0) {
+        // get amount from data-buy attribute
+        let amount = parseInt(event.target.dataset.buy);
+        if (credits < amount) {
+            amount = credits;
+        }
+        // add amount to balls
+        balls += amount;
+        // update balls element
+        ballsEl.innerHTML = balls;
+        // subtract credits
+        credits -= amount;
+        // update credits element
+        creditsEl.innerHTML = credits;
+    }
+}
+// sell balls function for buttons in div with ID SellBalls
+
+Array.from(document.getElementsByClassName("btn-SellBalls")).forEach((element) => {
+    element.addEventListener("click", sellBalls);
+});
+// sell balls function
+
+function sellBalls() {
+    // get amount from data-sell attribute
+    let amount = event.target.dataset.sell;
+    if (balls > 0 ){
+        // if amount is "all", set amount to 100% of balls
+        if ( amount === "all" || balls < amount ) {
+            amount = balls;
+        } else {
+            amount = parseInt(amount);
+        }
+        // subtract amount from balls
+        balls -= amount;
+        // update balls element
+        ballsEl.innerHTML = balls;
+        // add credits
+        credits += amount;
+        // update credits element
+        creditsEl.innerHTML = credits;
+    }
+}
+
+// if credits element is updated, set bottom of #credits to 2px
+const observerCredits = new MutationObserver(() => {
+    creditsEl.style.bottom = "2px";
+    setTimeout(() => {
+        creditsEl.style.bottom = "0px";
+    }, 100);
+});
+
+observerCredits.observe(creditsEl, { childList: true, subtree: true });

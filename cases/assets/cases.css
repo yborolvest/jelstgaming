@@ -1,5 +1,6 @@
 body {
     background-color: #14151f;
+    background-image: none;
     color: white;
     font-size: 16px;
     line-height: 1.5;
@@ -56,8 +57,11 @@ body {
     display: block;
     margin: 0 auto;
     width: 100vw;
-    background: #000;
-    height: 150px;
+    background: #14151f;
+    background-image: url('/cases/assets/img/inferno.jpg');
+    background-position: center;
+    background-size: cover;
+    height: 230px;
     border: 1px solid coral;
     border-left: none;
     border-right: none;
@@ -68,14 +72,14 @@ body {
 .case-spinner::after {
     content: '';
     position: absolute;
-    top: 5%;
+    top: 0%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 0;
     height: 0;
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
-    border-top: 20px solid coral;
+    border-left: 30px solid transparent;
+    border-right: 30px solid transparent;
+    border-top: 60px solid coral;
 }
 
 .case-spinner-inner {
@@ -88,18 +92,25 @@ body {
     transition: all 5s ease-out;
 }
 .case-item, .winning-case-item {
-    height: 80%;
-    min-width: 200px;
-    border-bottom: solid 4px;
+    height: 75%;
+    min-width: 300px;
+    border-bottom: solid 8px;
     margin: 16px 16px 16px 0;
     color: white;
     background: transparent;
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .case-item img, .winning-case-item img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+    max-width: 80%;
+    max-height: 90%;
+    height: auto;
+    width: auto;
+    object-fit: contain;
     object-position: center;
+    padding: .5rem;
 }
 .winning-case-item {
     /* filter: drop-shadow(0 0 0.75rem gold); */
@@ -121,7 +132,7 @@ body {
 
 .case-controls {
     display: flex;
-    flex-flow: row nowrap;
+    flex-flow: column nowrap;
     justify-content: center;
     align-items: center;
     margin: 0 auto;
@@ -165,7 +176,7 @@ body {
 
 .case-history-list {
     display: flex;
-    flex-flow: column nowrap;
+    flex-flow: column-reverse nowrap;
     justify-content: center;
     align-items: center;
     margin: 0 auto;

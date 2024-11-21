@@ -1,10 +1,11 @@
 // Setup global chances
-
+var sessionProfit = 0;
 // rarities
 const rarities_colors = {
-    "Mil-Spec": 50,
+    // total 100
+    "Mil-Spec": 40,
     "Restricted": 30,
-    "Classified": 20,
+    "Classified": 15,
     "Covert": 10,
     "Knife": 5
 };
@@ -12,29 +13,29 @@ const rarities_colors = {
 const rarities_quality = {
     "Battle-Scarred": {
         name: "Battle-Scarred",
-        chance: 0.6,
-        mult: 0.5 
+        chance: 0.15,
+        mult: 0.7
     },
     "Well-Worn": {
         name: "Well-Worn",
-        chance: 0.7,
-        mult: 0.6
+        chance: 0.20,
+        mult: 0.8
     },
     "Field-Tested": {
         name: "Field-Tested",
-        chance: 0.6,
-        mult: 0.8
+        chance: 0.35,
+        mult: 1
     },
 
     "Minimal Wear": {
         name: "Minimal Wear",
-        chance: 0.4,
-        mult: 1
+        chance: 0.20,
+        mult: 1.3
     },
     "Factory New": {
         name: "Factory New",
-        chance: 0.2,
-        mult: 1.5
+        chance: 0.10,
+        mult: 1.7
     }
 }
 
@@ -51,13 +52,13 @@ const cases = {
                 "name": "2 Kg Huzarensalade",
                 "rarity": "Mil-Spec",
                 "img": "https://jumbo.com/dam-images/fit-in/720x720/Products/29092023_1695994870270_1695994896148_8710948601192_5.png",
-                "worth": 10
+                "worth": 15
             },
             {
                 "name": "PSV shirt",
                 "rarity": "Restricted",
-                "img": "https://www.psvfanstore.nl/media/catalog/product/cache/d81c8dc66c69ceb69419c2e7e72e896d/2/7/272576_psv-thuisshirt-24-25.jpg",
-                "worth": 12
+                "img": "/cases/assets/img/psvshirt.webp",
+                "worth": 15
             },
             {
                 "name": "Max Vestappen's Red Bull Racing Cap",
@@ -68,21 +69,33 @@ const cases = {
             {
                 "name": "Jeroen's Renault Clio",
                 "rarity": "Covert",
-                "img": "https://s3.eu-central-1.amazonaws.com/hedinautomotive-nl/08/renault-clio-model-page-image.png",
+                "img": "/cases/assets/img/renaultclio.png",
                 "worth": 50
             },
             {
                 "name": "★ Jeroen Elst",
                 "rarity": "Knife",
                 "img": "/assets/img/jeroen.png",
-                "worth": 80
+                "worth": 90
             }
         ]
     },
     "chroma": {
         "name": "Chroma Case",
-        "price": 40,
+        "price": 30,
         "items": [
+            {
+                "name": "★ Bayonet | Marble Fade", 
+                "rarity": "Knife",
+                "img": "https://steamcdn-a.akamaihd.net/apps/730/icons/econ/default_generated/weapon_bayonet_am_marble_fade_light_large.adc286f39c98a9630620a97831ca2e5050229dff.png",
+                "worth": 350
+            },
+            {
+                "name": "★ Flip Knife | Tiger Tooth", 
+                "rarity": "Knife",
+                "img": "https://steamcdn-a.akamaihd.net/apps/730/icons/econ/default_generated/weapon_knife_flip_an_tiger_orange_light_large.441c0d2cf427d90fb079e82af0d074c1bfad13e4.png",
+                "worth": 550
+            },
             {
                 "name": "Galil AR | Chatterbox",
                 "rarity": "Covert",
@@ -167,6 +180,7 @@ const cases = {
                 "img": "https://steamcdn-a.akamaihd.net/apps/730/icons/econ/default_generated/weapon_scar20_aq_scar20_leak_light_large.06b9231638ba347e91c671ecf2c1364754794893.png",
                 "worth": 4
             }
+
 
         ]
     }
@@ -264,7 +278,7 @@ document.querySelector('.open-case').addEventListener('click', function () {
         const itemElement = document.createElement('div');
         itemElement.classList.add('case-item');
         itemElement.style.borderColor = getColorByRarity(randomItem.rarity);
-        itemElement.style.background = `linear-gradient(0deg, ${getColorByRarity(randomItem.rarity)} 0%, transparent 30%)`;
+        itemElement.style.background = `linear-gradient(0deg, ${getColorByRarity(randomItem.rarity)} -30%, transparent 30%)`;
         itemElement.innerHTML = `
             <img src="${randomItem.img}" alt="${randomItem.name}">
         `;
@@ -277,7 +291,7 @@ document.querySelector('.open-case').addEventListener('click', function () {
     const winningElement = document.createElement('div');
     winningElement.classList.add('winning-case-item');
     winningElement.style.borderColor = getColorByRarity(winningItem.rarity);
-    winningElement.style.background = `linear-gradient(0deg, ${getColorByRarity(winningItem.rarity)} 0%, transparent 30%)`;
+    winningElement.style.background = `linear-gradient(0deg, ${getColorByRarity(winningItem.rarity)} -30%, transparent 40%)`;
     winningElement.innerHTML = `
         <img src="${winningItem.img}" alt="${winningItem.name}">
     `;
@@ -285,7 +299,7 @@ document.querySelector('.open-case').addEventListener('click', function () {
     
     setTimeout(() => {
         // number between 12300 and 12100
-        var randomNum = Math.floor(Math.random() * 300) + 11900;
+        var randomNum = Math.floor(Math.random() * 200) + ( 56 * 316 );
         spinner.style.marginLeft = `-${randomNum}px`;
     }, 1);
     
@@ -311,4 +325,7 @@ document.querySelector('.open-case').addEventListener('click', function () {
     `;
     history.appendChild(historyItem);
 
+    // update session profit
+    sessionProfit += totalCredits - selectedCase.price;
+    document.querySelector('.profit').textContent = sessionProfit;
 });

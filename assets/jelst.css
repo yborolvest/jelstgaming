@@ -6,9 +6,11 @@
 }
 
 body {
+    background-image: linear-gradient(0deg, #e4e4e4, #e4e4e4 6px, #e2e2e2 6px, #e2e2e2);
     background-color: #e4e4e4;
     margin: 0;
     padding: 0;
+    background-size: 100% 12px;
 }
 
 .cursor {
@@ -106,7 +108,6 @@ body {
     justify-content: center;
     flex-flow: column;
     min-height: 50vh;
-    background-color: #e4e4e4;
     color: #fff;
     width: 80vw;
     max-width: 1080px;
@@ -138,26 +139,31 @@ body {
     font-size: 2rem;
     font-weight: 700;
     border-radius: 1rem;
-    box-shadow: inset 0 0 10px 0px rgba(0, 0, 0, 0.5);
+    box-shadow: inset 0 0 10px 0px rgba(0, 0, 0, 0.7);
     border: 2px solid #7a7a7a;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
 .jelst-home-btn:hover {
     transform: scale(1.05);
-    border: 2px solid turquoise;
+    border: 2px solid #1bc1e7;
 }
 
 .btn-plinko {
-    background: url('/assets/img/plinko.jpg') no-repeat center;  
+    background: url('/assets/img/pachinko.jpeg') no-repeat center;  
+    background-size: cover;
 }
 .btn-slots {
-    background: url('/assets/img/slots.jpg') no-repeat center;
+    background: url('/assets/img/slots.jpeg') no-repeat center;
+    background-size: cover;
 }
 .btn-cases {
     background: url('/assets/img/cases.webp') no-repeat center;
+    background-size: cover;
 }
 .btn-cs {
     background: url('/assets/img/static.gif') no-repeat center;
+    background-size: cover;
 }
 
 footer {
@@ -199,4 +205,35 @@ footer {
         right: 0;
     }
     
+}
+
+.wii-menu-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    bottom: 32px;
+    width: 96px;
+    height: 96px;
+    background: radial-gradient(circle,  #e2e2e2 0% 50%, #d1d1d1 100%);
+    border-radius: 512px;
+    border: 3px solid #1bc1e7;
+    z-index: 2;
+    transition: transform 0.3s ease-in-out;
+}
+.wii-menu-btn img {
+    height: 40px;
+    width: 40px;
+    object-fit: contain;
+    color: #7a7a7a;
+}
+.wii-menu-btn:hover {
+    transform: scale(1.05);
+}
+
+.footer-username {
+    left: 80px;
+}
+.footer-credits {
+    right: 80px;
 }
