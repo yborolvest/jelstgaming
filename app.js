@@ -35,16 +35,15 @@ app.post('/api/users', (req, res) => {
     const { uuid } = req.body;
 
     if(!uuid) {
-        res.status(400).send('Missing UUID');
+        return res.status(400).send('Missing UUID');
     }
 
     db.query('INSERT INTO users (uuid) VALUES (?)', [uuid], (err, results) => {
         if (err) {
             console.error('Error querying database', err);
-            res.status(500).send('Error querying database');
-            return;
+            return res.status(500).send('Error querying database');
         }
-        res.status(201).send('User created');
+        return res.status(201).send('User created');
     });
 });
 
@@ -118,6 +117,20 @@ app.get('/api/users/:uuid', (req, res) => {
     });
 });
 
+app.get('/api/users/uq/:name', (req, res) => {
+    const { name } = req.params;
+
+    db.query('SELECT COUNT(*) AS count FROM users WHERE name = ?', [name], (err, results) => {
+        if (err) {
+            console.error('Database error:', err);
+            return res.status(500).send('Error checking username uniqueness');
+        }
+
+        const isUnique = results[0].count === 0;
+        res.status(200).json({ isUnique });
+    });
+});
+
 app.get('/api/leaderboard', (req, res) => {
     db.query('SELECT name, credits FROM users WHERE name IS NOT NULL ORDER BY credits DESC LIMIT 10', (err, results) => {
         if (err) {
@@ -127,6 +140,10 @@ app.get('/api/leaderboard', (req, res) => {
         }
         res.json(results);
     });
+});
+
+app.get('/', (req, res) => {
+    res.send("api is running");
 });
 
 app.listen(PORT, () => {

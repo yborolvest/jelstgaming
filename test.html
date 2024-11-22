@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="assets/users.js"></script>
+    <script src="assets/credits.js"></script>
+</head>
+<body>
+    <p>Credits: <span id="c"></span></p>
+    <p>Credits na update: <span id="cr"></span></p>
+    <script>
+        GetCredits().then(credits => {
+            document.getElementById('c').innerText = credits.toString();
+        });
+        UpdateCredits(10).then(() => {
+            GetCredits().then(credits => {
+                document.getElementById('cr').innerText = credits.toString();
+            });
+        });
+        IsAvailable("JohnDoe").then(available => {
+            if(available.valueOf()) {
+                SetNickname('JohnDoe').then(() => {
+                    GetNickname().then(nickname => {
+                        console.log(nickname);
+                    });
+                });
+            } else {
+                console.log('Username is not available');
+            }
+        });
+
+    </script>
+</body>
+</html>

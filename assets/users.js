@@ -1,5 +1,5 @@
 var uuid;
-const site = 'http://127.0.0.1:3000'
+const site = 'https://backend.jelstgaming.yborolvest.nl'
 
 async function initUser(){
     let uuidStorage = localStorage.getItem('uuid');
@@ -25,7 +25,7 @@ async function initUser(){
 
 async function createUser(uuid){
     try{
-        const response = await fetch(site+'/api/users', {
+        const response = await fetch(`${site}/api/users`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -42,9 +42,9 @@ async function createUser(uuid){
     }
 }
 
-async function setNickname(name){
+async function SetNickname(name){
     try{
-        const response = await fetch(site+`/api/users/${uuid}`, {
+        const response = await fetch(`${site}/api/users/${uuid}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -53,7 +53,7 @@ async function setNickname(name){
         });
 
         if(!response.ok){
-            throw new Error('Failed to update name');
+            throw new Error('Naam niet geupdatet: ' + response.statusText);
         }
     }
     catch (err){
@@ -63,7 +63,7 @@ async function setNickname(name){
 
 async function GetNickname(){
     try{
-        const response = await fetch(site+`/api/users/${uuid}`);
+        const response = await fetch(`${site}/api/users/${uuid}`);
 
         if(!response.ok){
             throw new Error('Failed to get user');
@@ -77,9 +77,25 @@ async function GetNickname(){
     }
 }
 
+async function IsAvailable(name){
+    try{
+        const response = await fetch(`${site}/api/users/uq/${name}`);
+
+        if(!response.ok){
+            throw new Error('Failed to check name');
+        }
+
+        const data = await response.json();
+        return data.isUnique;
+    }
+    catch (err){
+        console.error(err);
+    }
+}
+
 async function getTopPlayers(){
     try{
-        const response = await fetch(site+'/api/leaderboard');
+        const response = await fetch(`${site}/api/leaderboard`);
 
         if(!response.ok){
             throw new Error('Failed to get leaderboard');
