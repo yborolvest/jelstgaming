@@ -243,9 +243,15 @@ function checkWin() {
             smallWinSound.volume = 0.05;
             smallWinSound.play();
         }
-        totalPayout -= 10;
+        totalPayout -= spinPrice;
         document.querySelector('#sessionProfit').textContent = (parseInt(document.querySelector('#sessionProfit').textContent) + totalPayout).toString();
         AdjustCredits(totalPayout).then(credits => {
+            creditsEl.innerHTML = credits;
+        });
+        alert(totalPayout);
+    }
+    else{
+        AdjustCredits(-spinPrice).then(credits => {
             creditsEl.innerHTML = credits;
         });
     }
