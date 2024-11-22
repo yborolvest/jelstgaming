@@ -4,3 +4,144 @@
     left: 50%;
     transform: translate(-50%, -50%);
 }
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.slotcontainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.slot {
+    width: 100px;
+    height: 267.5px;
+    border: 1px solid black;
+    border-radius: 7.5px;
+    display: inline-block;
+    overflow: hidden;
+    position: relative;
+    background: #fafafa;
+    box-shadow: 0 0 3px 2px rgba(0, 0, 0, 0.4) inset;
+}
+
+.slot .symbols {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: top 4s;
+}
+
+.slot .symbol {
+    width: 100px;
+    height: 85px;
+    font-size: 60px;
+    line-height: 100px;
+    display: block;
+    text-align: center;
+}
+
+button {
+    margin: 0 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+}
+
+.levercontainer {
+    position: relative;
+    margin-left: 20px;
+}
+
+.lever {
+    background: grey;
+    height: 250px;
+    width: 25px;
+    border-radius: 10px;
+    margin-top: -40px;
+    margin-left: 15px;
+    box-shadow: 0 0 3px 2px rgba(0, 0, 0, 0.4) inset;
+    transform-origin: bottom;
+}
+
+.levertip {
+    background: red;
+    height: 55px;
+    width: 55px;
+    border-radius: 50%;
+    position: relative;
+    box-shadow: 0 0 3px 2px rgba(0, 0, 0, 0.4) inset;
+    z-index: 2;
+}
+
+.dividerhr {
+    margin: 2px 10px;
+}
+
+.spinAmount {
+    width: 60px;
+    border: none;
+    border-radius: 5px;
+    margin-left: 10px;
+}
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    font-size: 16px;
+}
+
+.symbol img {
+    width: 64px;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+.symbol{
+    border: 1px black solid;
+}
+
+.winning-symbol {
+    border: 2px solid gold;
+    animation: blink 1s infinite;
+}
+
+.paytable {
+    margin: 20px 0;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 8px;
+    background: #f9f9f9;
+}
+
+.paytable table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+.paytable th,
+.paytable td {
+    padding: 8px;
+    border: 1px solid #ddd;
+}
+
+.paytable-symbol {
+    height: 40px;
+    width: auto;
+}
