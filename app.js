@@ -67,7 +67,7 @@ app.post('/api/credits/:uuid', (req, res) => {
     const { uuid } = req.params;
     const { credits } = req.body;
 
-    if (credits === undefined || credits === null || credits < 0) {
+    if (credits === undefined || credits === null) {
         res.status(400).send('Missing credits');
         return
     }
