@@ -7,3 +7,5 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Orbitron:wght@400..900&display=swap" rel="stylesheet">
     <link href="/assets/jelst-crosssite.css" rel="stylesheet">
+    <script src="/assets/users.js"></script>
+    <script src="/assets/credits.js"></script>

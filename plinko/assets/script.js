@@ -1,9 +1,10 @@
 "use strict";
 console.clear();
 // Set credits to 100
-let credits = 100;
 const creditsEl = document.getElementById("credits");
-creditsEl.innerHTML = credits;
+GetCredits().then((credits) => {
+    creditsEl.innerHTML = credits.toString();
+});
 const width = 620;
 const height = 534;
 // Note class
@@ -185,8 +186,9 @@ Matter.Events.on(engine, "collisionStart", (event) => {
             if (index >= 0 && index < 17) {
                 // Register ball
                 const ballsWon = Math.floor(multipliers[index]);
-                credits += ballsWon;
-                creditsEl.innerHTML = credits;
+                AdjustCredits(ballsWon).then((credits) => {
+                    creditsEl.innerHTML = credits;
+                });
                 // Ball hit note at bottom
                 const el = document.getElementById(`note-${index}`);
                 if (el.dataset.pressed !== "true") {
@@ -259,21 +261,24 @@ Array.from(document.getElementsByClassName("btn-BuyBalls")).forEach((element) =>
 // buy balls function
 
 function buyBalls() {
-    if (credits > 0) {
-        // get amount from data-buy attribute
-        let amount = parseInt(event.target.dataset.buy);
-        if (credits < amount) {
-            amount = credits;
+    // get amount from data-buy attribute
+    let amount = parseInt(event.target.dataset.buy);
+    GetCredits().then((credits) => {
+        if (credits > 0) {
+
+            if (credits < amount) {
+                amount = credits;
+            }
+            // add amount to balls
+            balls += amount;
+            // update balls element
+            ballsEl.innerHTML = balls;
+            // subtract credits
+            AdjustCredits(-amount).then((credits) => {
+                creditsEl.innerHTML = credits;
+            });
         }
-        // add amount to balls
-        balls += amount;
-        // update balls element
-        ballsEl.innerHTML = balls;
-        // subtract credits
-        credits -= amount;
-        // update credits element
-        creditsEl.innerHTML = credits;
-    }
+    });
 }
 // sell balls function for buttons in div with ID SellBalls
 
@@ -297,9 +302,9 @@ function sellBalls() {
         // update balls element
         ballsEl.innerHTML = balls;
         // add credits
-        credits += amount;
-        // update credits element
-        creditsEl.innerHTML = credits;
+        AdjustCredits(amount).then((credits) => {
+            creditsEl.innerHTML = credits;
+        });
     }
 }
 

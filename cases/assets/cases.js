@@ -1,5 +1,9 @@
 // Setup global chances
 var sessionProfit = 0;
+var creditsEl = document.querySelector('#credits');
+GetCredits().then((credits) => {
+    creditsEl.innerHTML = credits.toString();
+});
 // rarities
 const rarities_colors = {
     // total 100
@@ -253,14 +257,20 @@ document.querySelectorAll('input[name="caseSelect"]').forEach(radio => {
 // when the open case button is clicked, append the winning item to the .case-spinner at the 60th place and scroll to it.
 
 document.querySelector('.open-case').addEventListener('click', function () {
-    
     // generate 64 items
     const caseName = document.querySelector('input[name="caseSelect"]:checked').value;
     const selectedCase = cases[caseName];
     const spinner = document.querySelector('.case-spinner-inner');
 
+    // check if user has enough credits
+    GetCredits().then((credits) => {
+        if (credits < selectedCase.price) {
+            console.log('Not enough credits');
+        }
+        else{
+
     // clear items
-    spinner.innerHTML = '';    
+    spinner.innerHTML = '';
     // set spinner to margin-left 0
     spinner.classList.add('spinning-block');
     spinner.style.marginLeft = "0px";
@@ -296,16 +306,19 @@ document.querySelector('.open-case').addEventListener('click', function () {
         <img src="${winningItem.img}" alt="${winningItem.name}">
     `;
     spinner.insertBefore(winningElement, spinner.children[60]);
-    
+
     setTimeout(() => {
         // number between 12300 and 12100
         var randomNum = Math.floor(Math.random() * 200) + ( 56 * 316 );
         spinner.style.marginLeft = `-${randomNum}px`;
     }, 1);
-    
+
     // add winning item to .last-case
 
     var totalCredits = Math.round(winningItem.worth * winningItem.quality.mult);
+    AdjustCredits((totalCredits - selectedCase.price)).then((credits) => {
+        creditsEl.innerHTML = credits;
+    });
     const lastCase = document.querySelector('.last-case');
     lastCase.innerHTML = '';
     const lastCaseItem = document.createElement('div');
@@ -315,7 +328,7 @@ document.querySelector('.open-case').addEventListener('click', function () {
         <span>${winningItem.name} (${winningItem.quality.name})</span>
         <span class="earnings"> ${totalCredits} credits</span>
     `;
-    lastCase.appendChild(lastCaseItem); 
+    lastCase.appendChild(lastCaseItem);
 
     // update history
     const history = document.querySelector('.case-history-list');
@@ -328,4 +341,6 @@ document.querySelector('.open-case').addEventListener('click', function () {
     // update session profit
     sessionProfit += totalCredits - selectedCase.price;
     document.querySelector('.profit').textContent = sessionProfit;
+        }
+    });
 });

@@ -32,6 +32,7 @@
         </div>
         <div class="case-controls">
             <a id="openCaseButton" class="jelst-btn open-case">Open case</a>
+            <p>Credits: <span id="credits">0</span> credits</p>
             <p>Session Profit: <span class="profit">0</span> credits</p>
         </div>
         <div class="case-history">
