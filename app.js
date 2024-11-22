@@ -132,7 +132,7 @@ app.get('/api/users/uq/:name', (req, res) => {
 });
 
 app.get('/api/leaderboard', (req, res) => {
-    db.query('SELECT name, credits FROM users WHERE name IS NOT NULL ORDER BY credits DESC LIMIT 10', (err, results) => {
+    db.query('SELECT name, credits FROM users WHERE name IS NOT NULL ORDER BY credits DESC', (err, results) => {
         if (err) {
             console.error('Error querying database', err);
             res.status(500).send('Error querying database');
