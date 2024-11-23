@@ -40,7 +40,7 @@
         <div class="footer-credits-container">
             <div class="footer-credits-count">0</div>
             <div class="footer-credits-daily">
-                <a class="footer-credits-daily-link">
+                <a class="footer-credits-daily-link" href="/daily/">
                     <img src="/assets/img/credit.svg">
                     <span>Get daily credits</span>
                 </a>
