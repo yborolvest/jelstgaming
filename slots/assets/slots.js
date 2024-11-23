@@ -24,11 +24,11 @@ const paylines = [
 ];
 
 const symbols = [
-    { img: "./assets/img/cherry.webp", payout: [0, 0, 50, 100, 500] }, // [0-match, 1-match, 2-match, 3-match, 4-match, 5-match]
-    { img: "./assets/img/coconut.webp", payout: [0, 0, 75, 150, 750] },
-    { img: "./assets/img/orange.webp", payout: [0, 0, 100, 200, 1000] },
+    { img: "./assets/img/cherry.png", payout: [0, 0, 50, 100, 500] }, // [0-match, 1-match, 2-match, 3-match, 4-match, 5-match]
+    { img: "./assets/img/coconut.png", payout: [0, 0, 75, 150, 750] },
+    { img: "./assets/img/orange.png", payout: [0, 0, 100, 200, 1000] },
     { img: "./assets/img/watermelon.png", payout: [0, 0, 125, 250, 1250] },
-    { img: "./assets/img/grape.webp", payout: [0, 0, 150, 300, 1500] },
+    { img: "./assets/img/apple.png", payout: [0, 0, 150, 300, 1500] },
     { img: "./assets/img/seven.png", payout: [0, 0, 5000, 10000, 50000] }
 ];
 
