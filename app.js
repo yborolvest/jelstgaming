@@ -146,6 +146,42 @@ app.get('/', (req, res) => {
     res.send("api is running");
 });
 
+app.get('/api/users/:uuid/daily-usage', (req, res) => {
+    const { uuid } = req.params;
+
+    db.query('SELECT daily_usage FROM users WHERE uuid = ?', [uuid], (err, results) => {
+        if (err) {
+            console.error('Error querying database', err);
+            return res.status(500).send('Error querying database');
+        }
+        if (results.length === 0) {
+            return res.status(404).send('User not found');
+        }
+        res.json({ daily_usage: results[0].daily_usage });
+    });
+});
+
+app.post('/api/users/:uuid/daily-usage', (req, res) => {
+    const { uuid } = req.params;
+
+    // Get the current server date and time
+    const daily_usage = new Date();
+
+    db.query('UPDATE users SET daily_usage = ? WHERE uuid = ?', [daily_usage, uuid], (err, results) => {
+        if (err) {
+            console.error('Error querying database', err);
+            return res.status(500).send('Error querying database');
+        }
+
+        if (results.affectedRows === 0) {
+            return res.status(404).send('User not found');
+        }
+
+        res.status(200).send('Daily usage updated');
+    });
+});
+
+
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
