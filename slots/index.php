@@ -38,6 +38,7 @@
 
         <div style="display: flex;">
         </div>
+    <p>Cost per spin: <span id="costPerSpin">0</span></p>
     <p>Credits: <span id="credits">0</span></p>
     <p> Session profit: <span id="sessionProfit">0</span></p>
     </div>

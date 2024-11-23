@@ -4,10 +4,12 @@ const bigWinSound = new Audio('assets/audio/big_win.mp3');
 const leverSound = new Audio('assets/audio/lever.mp3');
 const slots = document.querySelectorAll('.slot');
 const transitionDelay = 1000;
-const spinPrice = 10;
+const spinPrice = 50;
 const bigWin = 1000;
 let spun = false;
 let creditsEl = document.querySelector('#credits')
+
+document.querySelector('#costPerSpin').innerHTML = spinPrice.toString();
 
 GetCredits().then((credits) => {
     creditsEl.innerHTML = credits.toString();
@@ -144,10 +146,6 @@ function reset() {
     generate();
 }
 
-document.querySelector('.levertip').addEventListener('click', function () {
-    spin();
-});
-
 function getVisibleSymbols() {
     // Extract the visible symbols in each column after spin
     const visibleSymbols = [];
@@ -228,6 +226,7 @@ function checkWin() {
             const winningSymbol = symbols.find(symbol => getFilenameFromURL(symbol.img) === currentSymbolFilename);
             if (winningSymbol) {
                 totalPayout += winningSymbol.payout[matchCount - 1]; // Payout based on match count
+                winningSymbols.forEach(symbol => symbol.classList.add('winning-symbol'));
             }
         }
     });
@@ -235,12 +234,12 @@ function checkWin() {
     // Update credits and display the result
     if (totalPayout > 0) {
         if(totalPayout > bigWin){
-            bigWinSound.volume = 0.05;
+            bigWinSound.volume = 0.2;
             bigWinSound.play();
         }
         else
         {
-            smallWinSound.volume = 0.05;
+            smallWinSound.volume = 0.2;
             smallWinSound.play();
         }
         totalPayout -= spinPrice;
@@ -248,12 +247,12 @@ function checkWin() {
         AdjustCredits(totalPayout).then(credits => {
             creditsEl.innerHTML = credits;
         });
-        alert(totalPayout);
     }
     else{
         AdjustCredits(-spinPrice).then(credits => {
             creditsEl.innerHTML = credits;
         });
+        document.querySelector('#sessionProfit').textContent = (parseInt(document.querySelector('#sessionProfit').textContent) - spinPrice).toString();
     }
 }
 
