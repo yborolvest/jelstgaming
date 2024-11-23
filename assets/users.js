@@ -108,4 +108,68 @@ async function getTopPlayers(){
     }
 }
 
+async function GetNextDailyDate() {
+    try {
+        // Fetch user data from the backend
+        const response = await fetch(`${site}/api/users/${uuid}/daily-usage`);
+        if (!response.ok) {
+            throw new Error('Failed to fetch user data');
+        }
+
+        const userData = await response.json();
+
+        // Assuming `lastDaily` is a timestamp (in milliseconds) stored in the user's data
+        const lastDaily = new Date(userData.daily_usage);
+
+        // Calculate the next available date for daily rewards
+        const nextDailyDate = new Date(lastDaily.getTime() + 24 * 60 * 60 * 1000);
+
+        return nextDailyDate; // Return as a Date object
+    } catch (err) {
+        console.error(err);
+        return null; // Return null on error
+    }
+}
+
+async function CheckDailyAvailable() {
+    try {
+        const nextDailyDate = await GetNextDailyDate();
+
+        // If `nextDailyDate` is null, the daily reward is already available
+        if (!nextDailyDate) {
+            return true;
+        }
+
+        // Otherwise, compare the current time with the next daily date
+        const now = new Date();
+        return now >= nextDailyDate;
+    } catch (err) {
+        console.error(err);
+        return false; // Return false on error, making the daily unavailable
+    }
+}
+
+async function SetDailyUsed() {
+    try {
+        // Send a POST request to update the user's lastDaily field
+        const response = await fetch(`${site}/api/users/${uuid}/daily-usage`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error(`Failed to set daily: ${response.statusText}`);
+        }
+
+        console.log('Daily usage updated successfully.');
+        return true; // Indicate success
+    } catch (err) {
+        console.error(err);
+        return false; // Indicate failure
+    }
+}
+
+
 initUser();
