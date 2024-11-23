@@ -1,15 +1,81 @@
+@import url('https://fonts.cdnfonts.com/css/seven-segment');
+
+body {
+    background-image: url("/slots/assets/img/blackjacktable.jpg");
+    background-size: cover;
+}
 #slots {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
+
 .container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    height: 100vh;
+    justify-content: flex-start;
+    min-height: 100vh;
+    max-width: 1080px;
+    margin: 0 auto;
+    background: linear-gradient(to top, #0a0129 0%, #1c2e5f 100%);
+    border-left: 8px solid;
+    border-right: 8px solid;
+    border-image: linear-gradient(to right, #a7a7a7, rgb(196, 196, 196), #a7a7a7) 6;
+    filter: drop-shadow(0 0 40px rgba(218, 165, 32, .4));
+}
+
+.slotsHeader {
+    width: 100%;
+    text-align: center;
+}
+.slotsHeader img {
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    max-width: 80%;
+    max-height: 600px;
+}
+
+.slotsHeader h1 {
+    font-size: 8em;
+    color: goldenrod;
+    text-shadow: 1px 1px 2px black;
+    text-transform: uppercase;
+    font-weight: 900;
+}
+
+.slotInformation {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    width: 100%;
+}
+.slotsCounterTitle {
+    text-align: center;
+    color: white;
+    font-size: 1.2rem;
+    letter-spacing: 5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-style: italic;
+
+}
+.slotInformation .slotsCounter {
+    display: flex;
+    flex-flow: column;
+    border: goldenrod 12px solid;
+    border-radius: 10px;
+    text-transform: uppercase;
+    padding: 8px;
+    color: red;
+    font-weight: 700;
+    font-family: 'Seven Segment', sans-serif;
+    font-size: 4rem;    
+    background: #131313;     
+    min-width: 200px;
+    filter: drop-shadow(0 4px 8px black);
 }
 
 .slotcontainer {
@@ -17,6 +83,12 @@
     justify-content: center;
     align-items: center;
     margin-bottom: 20px;
+    padding: 0 3rem;
+}
+
+.slotcontainer-inner {
+    border: solid 12px goldenrod;
+    border-radius: 10px;
 }
 
 .slot {
@@ -61,7 +133,7 @@ button {
 }
 
 .lever {
-    background: grey;
+    background: rgb(230, 230, 230);
     height: 250px;
     width: 25px;
     border-radius: 10px;
@@ -72,12 +144,12 @@ button {
 }
 
 .levertip {
-    background: red;
+    background: radial-gradient(circle, #ff4d4d, #be0909);
     height: 55px;
     width: 55px;
     border-radius: 50%;
     position: relative;
-    box-shadow: 0 0 3px 2px rgba(0, 0, 0, 0.4) inset;
+    box-shadow: 0 0 3px 2px rgba(255, 255, 255, 0.1) inset;
     z-index: 2;
 }
 
@@ -122,26 +194,38 @@ button {
 }
 
 .paytable {
-    margin: 20px 0;
-    border: 1px solid #ccc;
-    padding: 10px;
-    border-radius: 8px;
-    background: #f9f9f9;
+    background-color: #1d1d1d;
+    border: goldenrod solid 8px;
+    border-radius: 10px;
+    transform: rotate(-91deg) scale(0.8);
+    filter: drop-shadow(-4px 0 2px rgba(0,0,0,0.2));
+    padding: 20px 10px;
+    position: absolute;
+    top: 150px;
+    right: 100px;
 }
 
 .paytable table {
     width: 100%;
     border-collapse: collapse;
     text-align: center;
+    
 }
 
 .paytable th,
 .paytable td {
-    padding: 8px;
-    border: 1px solid #ddd;
+    transform: rotate(90deg);
+    color: white;
+}
+
+.paytable th.symbol-head{
+    padding: 10px;
+    color: goldenrod;
+    filter: drop-shadow(0 0 8px goldenrod);
 }
 
 .paytable-symbol {
     height: 40px;
     width: auto;
 }
+

@@ -1,7 +1,7 @@
 /* import */
 @import url('jelstanimations.css');
 
-* {
+html {
     font-family: 'Noto Sans', sans-serif;
 }
 
@@ -345,6 +345,10 @@ footer {
     margin: 0;
     width: 100%;
 }
+.footer-leaderboard-inner ul li {
+    margin-left: 1.75rem;
+    margin-bottom: .25rem;
+}
 li.top-player-1, li.top-player-2, li.top-player-3 {
     font-weight: 700;
 }
@@ -359,15 +363,21 @@ li.top-player-3 {
 }
 li.top-player-1:before {
     content: '🥇';
-    margin-right: 0.5em;
+    margin-right: -1.5em;
+    position: relative;
+    left: -1.75em;
 }
 li.top-player-2:before {
     content: '🥈';
-    margin-right: 0.5em;
+    margin-right: -1.5em;
+    position: relative;
+    left: -1.75em;
 }
 li.top-player-3:before {
     content: '🥉';
-    margin-right: 0.5em;
+    margin-right: -1.5em;
+    position: relative;
+    left: -1.75em;
 }
 
 .footer-credits-container {
@@ -377,4 +387,23 @@ li.top-player-3:before {
     transform: translateX(-50%);
     text-align: center;
     z-index: 5;
+}
+
+a.footer-credits-daily-link[href="/daily/"] {
+    color: green;
+    text-decoration: none;
+    vertical-align: middle;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-evenly;
+    animation: rainbowEffect 10s infinite linear alternate;
+}
+
+@keyframes rainbowEffect {
+    0% {
+        filter: sepia(1) hue-rotate(0deg) brightness(1.2);
+    }
+    100% {
+        filter: sepia(1) hue-rotate(360deg) brightness(1.2);
+    }
 }

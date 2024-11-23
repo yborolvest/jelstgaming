@@ -107,7 +107,7 @@ getTopPlayers().then(players => {
     // get the json response from the api and insert into the leaderboard
     players.forEach((player, index) => {
         const li = document.createElement('li');
-        li.innerText = player.name + ' - ' + player.credits + ' credits';
+        li.innerText = player.name + ' | ' + player.credits + ' credits';
         if (index < 3) {
             li.classList.add('top-player-' + (index + 1));
         }

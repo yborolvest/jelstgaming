@@ -5,7 +5,7 @@
 	<audio id="background-audio" src="/assets/audio/sunshine_casino.mp3" autoplay loop></audio>
 	<input id="volume-slider" type="range" min="0" max="100" value="15" step="1">
 	<script>
-		const excludedPages = ['/daily/', '/jelst/'];
+		const excludedPages = ['/daily/'];
 		const audioTracks = [
 			'/assets/audio/sunshine_casino.mp3',
 			'/assets/audio/l_casino.mp3',

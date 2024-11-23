@@ -17,7 +17,7 @@
             <a class="jelst-home-btn btn-plinko" href="/plinko/">Jelst Plinko</a>
             <a class="jelst-home-btn btn-slots" href="/slots/">Jelst Slots</a>
             <a class="jelst-home-btn btn-cases" href="/cases/">CS:Jelst Cases</a>
-            <a class="jelst-home-btn btn-cs"></a>
+            <a class="jelst-home-btn btn-cs" href="/spj/">Steen Papier Jelst</a>
             <a class="jelst-home-btn btn-cs"></a>
             <a class="jelst-home-btn btn-cs"></a>
             <a class="jelst-home-btn btn-cs"></a>
