@@ -36,7 +36,7 @@
                 <p id="userNameAlert" class="alert"></p>
             </div>
         </div>
-        <div class="footer-credits wii-menu-btn footer-leaderboard-btn"><img src="/assets/img/credit.svg"></div>
+        <div class="footer-credits wii-menu-btn footer-leaderboard-btn"><img src="/assets/img/leaderboard.svg"></div>
         <div class="footer-credits-container">
             <div class="footer-credits-count">0</div>
             <div class="footer-credits-daily">
