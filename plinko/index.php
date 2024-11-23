@@ -76,7 +76,8 @@
 </div>
 
 <script src='https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js'></script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js'></script><script  src="./assets/script.js"></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js'></script>
+<script src="./assets/script.js"></script>
 <?php require_once($_SERVER['DOCUMENT_ROOT'] . '/templates/footer.php'); ?>
 </body>
 </html>
